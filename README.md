@@ -1,6 +1,7 @@
 # Win ACL Checker
 
-![Banner](docs/banner.png)
+![Uploading 1780195253079.png…]()
+
 
 **Windows ACL 权限排查修复工具** —— 扫描目录权限链路，检测并修复沙盒/受限用户无法访问的权限问题。
 
