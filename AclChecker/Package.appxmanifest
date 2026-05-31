@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap rescap">
+
+  <Identity
+    Name="MioruRin.AclChecker"
+    Publisher="CN=MioruRin"
+    Version="1.0.1.0"
+    ProcessorArchitecture="x64" />
+
+  <Properties>
+    <DisplayName>ACL 权限排查修复工具</DisplayName>
+    <PublisherDisplayName>MioruRin</PublisherDisplayName>
+    <Logo>PackageAssets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.19041.0" MaxVersionTested="10.0.26100.0" />
+    <PackageDependency Name="Microsoft.WindowsAppRuntime.1.7" MinVersion="7000.45.2406.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="zh-cn" />
+    <Resource Language="en-us" />
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="AclChecker.exe"
+      EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements
+        DisplayName="ACL 权限排查修复工具"
+        Description="扫描目录权限链路，检测并修复沙盒/受限用户无法访问的权限问题"
+        BackgroundColor="transparent"
+        Square150x150Logo="PackageAssets\Square150x150Logo.png"
+        Square44x44Logo="PackageAssets\Square44x44Logo.png">
+        <uap:DefaultTile
+          Wide310x150Logo="PackageAssets\Wide310x150Logo.png"
+          Square310x310Logo="PackageAssets\LargeTile.png"
+          Square71x71Logo="PackageAssets\SmallTile.png"
+          ShortName="ACL Checker" />
+        <uap:SplashScreen Image="PackageAssets\SplashScreen.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust" />
+    <rescap:Capability Name="allowElevation" />
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>

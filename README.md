@@ -7,12 +7,21 @@
 
 [⬇ 下载最新版本](https://github.com/MioruRin/win-acl-checker/releases/latest)
 
-提供两个版本：
+提供三种安装方式：
 
-- **AclChecker-WinUI3.zip** (34 MB) — 需安装 [.NET 8 运行时](https://dotnet.microsoft.com/download/dotnet/8.0)
+- **AclChecker-v1.0.1-x64.msix** (35 MB) — MSIX 安装包（推荐），双击安装，自动创建开始菜单快捷方式
+- **AclChecker-WinUI3.zip** (34 MB) — 免安装版，需安装 [.NET 8 运行时](https://dotnet.microsoft.com/download/dotnet/8.0)
 - **AclChecker-WinUI3-SelfContained.zip** (65 MB) — 自包含版，无需安装运行时，解压即用
 
-> 运行前请右键 `AclChecker.exe` → **以管理员身份运行**。
+### MSIX 安装说明
+
+MSIX 使用自签名证书签名，安装前需先将证书导入受信任的根证书存储：
+
+1. 下载 Release 中的 `AclChecker-signing.cer` 证书文件
+2. 双击证书 → 安装证书 → 选择「本地计算机」→ 将所有证书放入「受信任的根证书颁发机构」
+3. 完成后双击 `.msix` 文件即可安装
+
+> 免安装版请右键 `AclChecker.exe` → **以管理员身份运行**。
 
 ---
 
@@ -123,6 +132,8 @@ win-acl-checker/
 │   ├── ScanPage.xaml(.cs)      # 权限扫描页
 │   ├── LogPage.xaml(.cs)       # 操作日志页
 │   ├── AboutPage.xaml(.cs)     # 关于页
+│   ├── Package.appxmanifest     # MSIX 打包清单
+│   ├── PackageAssets/           # MSIX 商店图标资源
 │   ├── Models.cs               # 数据模型（AclResultItem 等）
 │   └── DataService.cs          # 数据持久化服务
 └── README.md

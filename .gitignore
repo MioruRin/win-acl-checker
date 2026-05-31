@@ -63,11 +63,18 @@ env/
 *.spec.bak
 
 # ============================================
-# Publish outputs
+# Publish / Package outputs
 # ============================================
 publish/
 publish-sc/
+publish-new/
+publish-sc-new/
+msix-staging/
 *.zip
+*.msix
+*.pfx
+*.cer
+*.ps1
 
 # ============================================
 # OS files
