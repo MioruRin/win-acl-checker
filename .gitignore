@@ -1,0 +1,83 @@
+# ============================================
+# Build outputs
+# ============================================
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+dist/
+*.exe
+*.dll
+*.pdb
+*.xbf
+*.pri
+*.deps.json
+*.runtimeconfig.json
+
+# ============================================
+# Visual Studio / Rider
+# ============================================
+.vs/
+*.sln
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vscode/
+.idea/
+
+# ============================================
+# .NET / NuGet
+# ============================================
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ============================================
+# Python
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+*.spec.bak
+*.whl
+.venv/
+venv/
+env/
+
+# ============================================
+# PyInstaller
+# ============================================
+*.manifest
+*.spec.bak
+
+# ============================================
+# Publish outputs
+# ============================================
+publish/
+publish-sc/
+*.zip
+
+# ============================================
+# OS files
+# ============================================
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# ============================================
+# Uploads / temp
+# ============================================
+.uploads/
+.workbuddy/

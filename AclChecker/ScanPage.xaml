@@ -1,0 +1,216 @@
+<Page
+    x:Class="AclChecker.ScanPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AclChecker"
+    AllowDrop="True" DragOver="OnDragOver" Drop="OnDrop">
+
+    <Page.Resources>
+        <local:HexToBrushConverter x:Key="HexBrush"/>
+    </Page.Resources>
+
+    <ScrollViewer Padding="32,8,32,32" VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="16">
+
+            <TextBlock Text="ACL 权限查看与修改"
+                       Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBlock Text="选择目录，查看完整权限链路，并可选择性修改权限。"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                       Style="{StaticResource BodyTextBlockStyle}"/>
+
+            <!-- 目标选择 -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="20">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="选择目标" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                    <Grid ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" x:Name="PathBox"
+                                 PlaceholderText="点击右侧按钮选择文件或目录..."
+                                 IsReadOnly="True" VerticalAlignment="Center"/>
+                        <Button Grid.Column="1" Content="选择文件"
+                                Click="OnSelectFile" VerticalAlignment="Center"/>
+                        <Button Grid.Column="2" Content="选择目录"
+                                Click="OnSelectFolder" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Button Content="开始扫描" Style="{StaticResource AccentButtonStyle}"
+                            Click="OnScan" x:Name="ScanBtn"/>
+                    <ProgressRing x:Name="ScanProgress" Visibility="Collapsed" 
+                                  Width="24" Height="24" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 结果表格 -->
+            <Border x:Name="ResultCard"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Visibility="Collapsed">
+                <StackPanel>
+                    <!-- 表头 -->
+                    <Grid Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                          Padding="16,12"
+                          ColumnSpacing="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" MinWidth="120"/>
+                            <ColumnDefinition Width="Auto" MinWidth="40"/>
+                            <ColumnDefinition Width="Auto" MinWidth="48"/>
+                            <ColumnDefinition Width="Auto" MinWidth="56"/>
+                            <ColumnDefinition Width="Auto" MinWidth="56"/>
+                            <ColumnDefinition Width="Auto" MinWidth="48"/>
+                            <ColumnDefinition Width="Auto" MinWidth="56"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Column="0" Text="目录路径" 
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="继承" 
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   MinWidth="40"/>
+                        <TextBlock Grid.Column="2" Text="Users" 
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   MinWidth="48"/>
+                        <TextBlock Grid.Column="3" Text="Everyone" 
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   MinWidth="56"/>
+                        <TextBlock Grid.Column="4" Text="SYSTEM" 
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   MinWidth="56"/>
+                        <TextBlock Grid.Column="5" Text="Admins" 
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   MinWidth="48"/>
+                        <TextBlock Grid.Column="6" Text="操作" 
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   MinWidth="56"/>
+                    </Grid>
+                    
+                    <!-- 数据行 -->
+                    <ScrollViewer MaxHeight="400" VerticalScrollBarVisibility="Auto">
+                        <ItemsRepeater x:Name="ResultRepeater"
+                                       Margin="0,0,0,8">
+                        <ItemsRepeater.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="16,8"
+                                      ColumnSpacing="4"
+                                      Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                      BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                      BorderThickness="0,1,0,0"
+                                      Tapped="OnResultTapped"
+                                      PointerEntered="OnRowPointerEntered"
+                                      PointerExited="OnRowPointerExited">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" MinWidth="120"/>
+                                        <ColumnDefinition Width="Auto" MinWidth="40"/>
+                                        <ColumnDefinition Width="Auto" MinWidth="48"/>
+                                        <ColumnDefinition Width="Auto" MinWidth="56"/>
+                                        <ColumnDefinition Width="Auto" MinWidth="56"/>
+                                        <ColumnDefinition Width="Auto" MinWidth="48"/>
+                                        <ColumnDefinition Width="Auto" MinWidth="56"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- 目录路径 -->
+                                    <StackPanel Grid.Column="0" 
+                                                Orientation="Horizontal" 
+                                                Spacing="8"
+                                                VerticalAlignment="Center">
+                                        <FontIcon Glyph="&#xE7BA;" 
+                                                  FontSize="16" 
+                                                  Foreground="#E74856"
+                                                  Visibility="{Binding RiskIconVisibility}"
+                                                  ToolTipService.ToolTip="{Binding RiskDescription}"/>
+                                        <TextBlock Text="{Binding DirPath}"
+                                                   TextTrimming="CharacterEllipsis"/>
+                                    </StackPanel>
+
+                                    <!-- 继承 -->
+                                    <FontIcon Grid.Column="1" 
+                                              Glyph="{Binding HasInheritanceIcon}"
+                                              FontSize="16"
+                                              Foreground="{Binding HasInheritanceColorHex, Converter={StaticResource HexBrush}}"
+                                              HorizontalAlignment="Center"
+                                              ToolTipService.ToolTip="{Binding HasInheritanceTip}"/>
+
+                                    <!-- Users -->
+                                    <FontIcon Grid.Column="2" 
+                                              Glyph="{Binding UsersIcon}"
+                                              FontSize="16"
+                                              Foreground="{Binding UsersColorHex, Converter={StaticResource HexBrush}}"
+                                              HorizontalAlignment="Center"
+                                              ToolTipService.ToolTip="{Binding UsersTip}"/>
+
+                                    <!-- Everyone -->
+                                    <FontIcon Grid.Column="3" 
+                                              Glyph="{Binding EveryoneIcon}"
+                                              FontSize="16"
+                                              Foreground="{Binding EveryoneColorHex, Converter={StaticResource HexBrush}}"
+                                              HorizontalAlignment="Center"
+                                              ToolTipService.ToolTip="{Binding EveryoneTip}"/>
+
+                                    <!-- SYSTEM -->
+                                    <FontIcon Grid.Column="4" 
+                                              Glyph="{Binding SystemIcon}"
+                                              FontSize="16"
+                                              Foreground="{Binding SystemColorHex, Converter={StaticResource HexBrush}}"
+                                              HorizontalAlignment="Center"
+                                              ToolTipService.ToolTip="{Binding SystemTip}"/>
+
+                                    <!-- Admins -->
+                                    <FontIcon Grid.Column="5" 
+                                              Glyph="{Binding AdminsIcon}"
+                                              FontSize="16"
+                                              Foreground="{Binding AdminsColorHex, Converter={StaticResource HexBrush}}"
+                                              HorizontalAlignment="Center"
+                                              ToolTipService.ToolTip="{Binding AdminsTip}"/>
+
+                                    <!-- 修改按钮 -->
+                                    <Button Grid.Column="6" 
+                                            Content="修改"
+                                            Tag="{Binding DirPath}" 
+                                            Click="OnModify"
+                                            HorizontalAlignment="Center"
+                                            FontSize="11" 
+                                            Padding="8,2"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsRepeater.ItemTemplate>
+                    </ItemsRepeater>
+                </ScrollViewer>
+                </StackPanel>
+            </Border>
+
+            <!-- 权限详情 -->
+            <Border x:Name="DetailCard"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="16"
+                    Visibility="Collapsed">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="详细权限信息" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="300">
+                        <TextBlock x:Name="DetailText"
+                                   IsTextSelectionEnabled="True"
+                                   FontFamily="Cascadia Code, Consolas" FontSize="12"
+                                   TextWrapping="Wrap"/>
+                    </ScrollViewer>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

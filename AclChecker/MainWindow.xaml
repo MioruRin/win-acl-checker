@@ -1,0 +1,44 @@
+<Window
+    x:Class="AclChecker.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="ACL 权限排查修复工具">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 自定义标题栏：应用图标+名称，和微软商店一样 -->
+        <Grid x:Name="AppTitleBar" Grid.Row="0" Height="48"
+              VerticalAlignment="Top" Padding="16,0,0,0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="10">
+                <FontIcon Glyph="&#xE7C3;" FontSize="16" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                <TextBlock Text="ACL 权限排查修复工具"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource CaptionTextBlockStyle}"
+                           Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+            </StackPanel>
+        </Grid>
+
+        <NavigationView
+            x:Name="NavView"
+            Grid.Row="1"
+            IsPaneToggleButtonVisible="True"
+            IsBackButtonVisible="Collapsed"
+            PaneDisplayMode="Left"
+            SelectionChanged="OnNavSelectionChanged"
+            IsSettingsVisible="True"
+            ExpandedModeThresholdWidth="800"
+            OpenPaneLength="220">
+
+            <NavigationView.MenuItems>
+                <NavigationViewItem Icon="Find" Content="权限扫描" Tag="scan" ToolTipService.ToolTip="扫描目录权限链"/>
+                <NavigationViewItem Icon="Clock" Content="操作日志" Tag="log" ToolTipService.ToolTip="查看历史操作记录"/>
+            </NavigationView.MenuItems>
+
+            <Frame x:Name="ContentFrame"/>
+        </NavigationView>
+    </Grid>
+</Window>
