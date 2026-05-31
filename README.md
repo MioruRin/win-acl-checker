@@ -2,7 +2,18 @@
 
 **Windows ACL 权限排查修复工具** —— 扫描目录权限链路，检测并修复沙盒/受限用户无法访问的权限问题。
 
-![.NET 8](https://img.shields.io/badge/.NET-8.0-blueviolet) ![Windows](https://img.shields.io/badge/Windows-10%2F11-blue) ![License](https://img.shields.io/badge/license-MIT-green)
+![.NET 8](https://img.shields.io/badge/.NET-8.0-blueviolet) ![Windows](https://img.shields.io/badge/Windows-10%2F11-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Release](https://img.shields.io/github/v/release/MioruRin/win-acl-checker)
+
+## 下载
+
+[⬇ 下载最新版本](https://github.com/MioruRin/win-acl-checker/releases/latest)
+
+提供两个版本：
+
+- **AclChecker-WinUI3.zip** (34 MB) — 需安装 [.NET 8 运行时](https://dotnet.microsoft.com/download/dotnet/8.0)
+- **AclChecker-WinUI3-SelfContained.zip** (65 MB) — 自包含版，无需安装运行时，解压即用
+
+> 运行前请右键 `AclChecker.exe` → **以管理员身份运行**。
 
 ---
 
