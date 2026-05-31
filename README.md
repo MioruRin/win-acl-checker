@@ -1,6 +1,7 @@
-# Win ACL Checker
+<img width="1584" height="672" alt="1780195253079" src="https://github.com/user-attachments/assets/be85b1fa-52ca-4629-9e72-35b9c3651b3b" /># Win ACL Checker
 
-![Uploading 1780195253079.png…]()
+<img width="1584" height="672" alt="1780195253079" src="https://github.com/user-attachments/assets/dd73fee7-1fce-4939-a9aa-b94ec3862b09" />
+
 
 
 **Windows ACL 权限排查修复工具** —— 扫描目录权限链路，检测并修复沙盒/受限用户无法访问的权限问题。
