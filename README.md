@@ -9,7 +9,7 @@
 
 提供三种安装方式：
 
-- **AclChecker-v1.0.1-x64.msix** (35 MB) — MSIX 安装包（推荐），双击安装，自动创建开始菜单快捷方式
+- **AclChecker-v1.0.1-x64.msix** (35 MB) — MSIX 安装包（不推荐，目前仅用于git开发存储，后期会上架ms应用商店并删除该分支），双击安装，自动创建开始菜单快捷方式
 - **AclChecker-WinUI3.zip** (34 MB) — 免安装版，需安装 [.NET 8 运行时](https://dotnet.microsoft.com/download/dotnet/8.0)
 - **AclChecker-WinUI3-SelfContained.zip** (65 MB) — 自包含版，无需安装运行时，解压即用
 
