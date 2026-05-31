@@ -1,5 +1,7 @@
 # Win ACL Checker
 
+![Banner](docs/banner.png)
+
 **Windows ACL 权限排查修复工具** —— 扫描目录权限链路，检测并修复沙盒/受限用户无法访问的权限问题。
 
 ![.NET 8](https://img.shields.io/badge/.NET-8.0-blueviolet) ![Windows](https://img.shields.io/badge/Windows-10%2F11-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Release](https://img.shields.io/github/v/release/MioruRin/win-acl-checker)

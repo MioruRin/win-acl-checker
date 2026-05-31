@@ -16,7 +16,7 @@
                     Padding="24">
                 <StackPanel Spacing="12">
                     <StackPanel Orientation="Horizontal" Spacing="16">
-                        <FontIcon Glyph="&#xE7C3;" FontSize="48" Foreground="{ThemeResource AccentFillColorDefaultBrush}"/>
+                        <Image Source="Assets/app_icon.png" Width="48" Height="48"/>
                         <StackPanel VerticalAlignment="Center">
                             <TextBlock Text="ACL 权限排查修复工具" Style="{StaticResource SubtitleTextBlockStyle}"/>
                             <TextBlock Text="版本 1.0" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>

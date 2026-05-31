@@ -14,7 +14,7 @@
         <Grid x:Name="AppTitleBar" Grid.Row="0" Height="48"
               VerticalAlignment="Top" Padding="16,0,0,0">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="10">
-                <FontIcon Glyph="&#xE7C3;" FontSize="16" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                <Image Source="Assets/app_icon.png" Width="20" Height="20"/>
                 <TextBlock Text="ACL 权限排查修复工具"
                            VerticalAlignment="Center"
                            Style="{StaticResource CaptionTextBlockStyle}"

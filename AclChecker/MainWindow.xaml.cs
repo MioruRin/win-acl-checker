@@ -19,6 +19,22 @@ public sealed partial class MainWindow : Window
         this.Title = "ACL 权限排查修复工具";
         this.AppWindow.Resize(new Windows.Graphics.SizeInt32(1000, 720));
 
+        // ─── 设置窗口图标 ─────────────────────────────────────
+        try
+        {
+            var iconPath = System.IO.Path.Combine(AppContext.BaseDirectory, "app.ico");
+            App.Log($"SetIcon path: {iconPath}, exists: {System.IO.File.Exists(iconPath)}");
+            if (System.IO.File.Exists(iconPath))
+            {
+                this.AppWindow.SetIcon(iconPath);
+                App.Log("SetIcon OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            App.Log($"SetIcon failed: {ex.Message}");
+        }
+
         // ─── 启用 Mica 背景并延伸到标题栏 ───────────────────
         TrySetMicaBackdrop();
         SetupTitleBar();
@@ -57,9 +73,10 @@ public sealed partial class MainWindow : Window
         // 设置标题栏按钮背景为透明，让 Mica 透出来
         appWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
         appWindow.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-        appWindow.TitleBar.ButtonHoverBackgroundColor = Windows.UI.Color.FromArgb(0x33, 0xFF, 0xFF, 0xFF);
-        appWindow.TitleBar.ButtonPressedBackgroundColor = Windows.UI.Color.FromArgb(0x66, 0xFF, 0xFF, 0xFF);
-        appWindow.TitleBar.ButtonForegroundColor = Colors.White;
+        appWindow.TitleBar.ButtonHoverBackgroundColor = Windows.UI.Color.FromArgb(0x33, 0x00, 0x00, 0x00);
+        appWindow.TitleBar.ButtonPressedBackgroundColor = Windows.UI.Color.FromArgb(0x66, 0x00, 0x00, 0x00);
+        appWindow.TitleBar.ButtonForegroundColor = Colors.Black;
+        appWindow.TitleBar.ButtonInactiveForegroundColor = Colors.Gray;
 
         // 设置窗口圆角 + 标题栏 Mica
         try

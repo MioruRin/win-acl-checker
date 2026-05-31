@@ -9,6 +9,7 @@ public sealed partial class LogPage : Page
     public LogPage()
     {
         this.InitializeComponent();
+        this.NavigationCacheMode = NavigationCacheMode.Required;
         this.Loaded += OnPageLoaded;
     }
 
